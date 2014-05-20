@@ -277,5 +277,10 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         }
         return result;
     }
+    
+    public void merkeVor()
+    {
+    	
+    }
 
 }
