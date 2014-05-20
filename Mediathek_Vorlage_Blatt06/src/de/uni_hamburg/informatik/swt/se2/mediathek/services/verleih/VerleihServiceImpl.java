@@ -312,7 +312,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 		    if(getVormerkkarteFuerMedium(medium).equals(null))
 		    {
 		        entleiher = getVerleihkarteFuer(medium).getEntleiher();
-		        vormerker = new LinkedList();
+		        vormerker = new LinkedList<Kunde>();
 		        vormerker.add(kunde);
 		    }
 		    else
@@ -323,13 +323,13 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 		    }
 			Vormerkkarte vormerkkarte = new Vormerkkarte(entleiher,medium,vormerker);
 			_vormerkkarten.remove(medium);
-			_vormerkkarten.add(medium, vormerkkarte);
+			_vormerkkarten.put(medium, vormerkkarte);
 		}
 	}
 
 	@Override
 	public List<Kunde> getVormerker(Medium medium) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	   
 		return null;
 	}
 
