@@ -330,7 +330,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 	{  
 	    if(getVormerkkarteFuerMedium(medium)!=null)
 	    {
-		return getVormerkkarteFuerMedium(medium).getVormerker();
+	    	return getVormerkkarteFuerMedium(medium).getVormerker();
 	    }
 	    else
 	    {
