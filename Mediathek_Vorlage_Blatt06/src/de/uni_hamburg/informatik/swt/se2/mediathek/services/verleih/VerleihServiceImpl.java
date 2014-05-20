@@ -323,7 +323,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 		    }
 			Vormerkkarte vormerkkarte = new Vormerkkarte(entleiher,medium,vormerker);
 			_vormerkkarten.remove(medium);
-			_vormerkkarten.add(medium, vormerkkarte);
+			_vormerkkarten.put(medium, vormerkkarte);
 		}
 	}
 
