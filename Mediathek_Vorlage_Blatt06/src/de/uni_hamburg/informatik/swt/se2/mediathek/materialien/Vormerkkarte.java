@@ -47,6 +47,7 @@ public class Vormerkkarte
         _entleiher = entleiher;
         _medium = medium;
         _vormerker = new LinkedList<Kunde>();
+        
     }
 
     /**
