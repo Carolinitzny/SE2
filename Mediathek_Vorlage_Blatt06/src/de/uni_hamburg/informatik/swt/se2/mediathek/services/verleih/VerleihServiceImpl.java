@@ -18,7 +18,7 @@ import de.uni_hamburg.informatik.swt.se2.mediathek.services.medienbestand.Medien
 /**
  * Diese Klasse implementiert das Interface VerleihService. Siehe dortiger
  * Kommentar.
- * 
+ * test
  * @author SE2-Team
  * @version SoSe 2014
  */
