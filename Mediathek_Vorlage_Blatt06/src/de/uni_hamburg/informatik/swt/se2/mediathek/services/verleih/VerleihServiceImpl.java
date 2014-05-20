@@ -8,6 +8,7 @@ import java.util.Map;
 import de.uni_hamburg.informatik.swt.se2.mediathek.fachwerte.Datum;
 import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.Kunde;
 import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.Verleihkarte;
+import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.Vormerkkarte;
 import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.medien.Medium;
 import de.uni_hamburg.informatik.swt.se2.mediathek.services.AbstractObservableService;
 import de.uni_hamburg.informatik.swt.se2.mediathek.services.kundenstamm.KundenstammService;
@@ -277,10 +278,49 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         }
         return result;
     }
-    
-    public void merkeVor()
-    {
-    	
-    }
+
+	@Override
+	public boolean istVormerkenMoeglich(Kunde kunde, Medium medium) {
+		Vormerkkarte vormerkkarte = getVormerkkarteFuerMedium(medium);
+		if (vormerkkarte.equals(null) || vormerkkarte.getVormerker().size() > 3)
+				{
+					return false;
+				}
+					for(Kunde k:vormerkkarte.getVormerker())
+					{
+						if (k.equals(kunde))
+						{
+							return false;
+						}
+					}
+		return true;
+	}
+
+	@Override
+	public void merkeVor(Kunde kunde, Medium medium) {
+		if (istVormerkenMoeglich(kunde, medium))
+		{
+			List<Kunde> vormerker = getVormerkkarteFuerMedium(medium).getVormerker();
+			Vormerkkarte vormerkkarte = new Vormerkkarte(kunde, medium,  )
+		}
+	}
+
+	@Override
+	public List<Kunde> getVormerker(Medium medium) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vormerkkarte getVormerkkarteFuerMedium(Medium medium) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Vormerkkarte> getVormerkkarteFuerKunde(Kunde kunde) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

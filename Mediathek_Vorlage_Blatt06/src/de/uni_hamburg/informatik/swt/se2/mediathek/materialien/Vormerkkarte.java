@@ -1,5 +1,8 @@
 package de.uni_hamburg.informatik.swt.se2.mediathek.materialien;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.medien.Medium;
 
 /**
@@ -18,19 +21,15 @@ import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.medien.Medium;
 public class Vormerkkarte
 {
 
-    // Eigenschaften einer Vormerkkarte
+    // Eigenschaften einer VormerkkartMediume
     private final Kunde _entleiher;
-    private final Kunde _vormerker1;
-    private final Kunde _vormerker2;
-    private final Kunde _vormerker3;
+    private final List<Kunde> _vormerker;
     private final Medium _medium;
 
     /**
      * Initialisert eine neue Vormerkkarte mit den gegebenen Daten.
      * 
-     * @param vormerker1 Ein Kunde, der das Medium vormerkt.
-     * @param vormerker2 Ein Kunde, der das Medium vormerkt.
-     * @param vormerker3 Ein Kunde, der das Medium vormerkt.
+     * @param vormerkerer Guys die gierig auf die medien sind.
      * @param entleiher Ein Kunde, der das Medium ausgeliehen hat.
      * @param medium Ein vorgemerktes Medium.
      * 
@@ -39,20 +38,15 @@ public class Vormerkkarte
      * 
      * @ensure #getEntleiher() == entleiher
      * @ensure #getMedium() == medium
-     * @ensure #getVormerker1() == vormerker1
-     * @ensure #getVormerker2() == vormerker2
-     * @ensure #getVormerker3() == vormerker3
      */
-    public Vormerkkarte(Kunde entleiher, Medium medium, Kunde vormerker1, Kunde vormerker2, Kunde vormerker3)
+    public Vormerkkarte(Kunde entleiher, Medium medium, List<Kunde> vormerker)
     {
         assert entleiher != null : "Vorbedingung verletzt: entleiher != null";
         assert medium != null : "Vorbedingung verletzt: medium != null";
 
         _entleiher = entleiher;
         _medium = medium;
-        _vormerker1 = vormerker1;
-        _vormerker2 = vormerker2;
-        _vormerker3 = vormerker3;
+        _vormerker = new LinkedList<Kunde>();
     }
 
     /**
@@ -62,36 +56,11 @@ public class Vormerkkarte
      * 
      * 
      */
-    public Kunde getVormerker1()
+    public List<Kunde> getVormerker()
     {
-        return _vormerker1;
+        return _vormerker;
     }
-    
-    /**
-     * Gibt den Vormerker zurück.
-     * 
-     * @return Der Vormerker Nummer 2
-     * 
-     * 
-     */
-    public Kunde getVormerker2()
-    {
-        return _vormerker2;
-    }
-
-    /**
-     * Gibt den Vormerker zurück.
-     * 
-     * @return Der Vormerker Nummer 3
-     * 
-     * 
-     */
-    public Kunde getVormerker3()
-    {
-        return _vormerker3;
-    }
-
-    /**
+        /**
      * Gibt den Entleiher zurück.
      * 
      * @return den Kunden, der das Medium entliehen hat.
