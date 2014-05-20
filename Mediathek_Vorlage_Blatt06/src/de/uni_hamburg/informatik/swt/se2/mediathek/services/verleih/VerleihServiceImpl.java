@@ -13,6 +13,7 @@ import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.medien.Medium;
 import de.uni_hamburg.informatik.swt.se2.mediathek.services.AbstractObservableService;
 import de.uni_hamburg.informatik.swt.se2.mediathek.services.kundenstamm.KundenstammService;
 import de.uni_hamburg.informatik.swt.se2.mediathek.services.medienbestand.MedienbestandService;
+import de.uni_hamburg.informatik.swt.se2.mediathek.services.medienbestand.MedienbestandServiceImpl;
 
 /**
  * Diese Klasse implementiert das Interface VerleihService. Siehe dortiger
@@ -308,7 +309,8 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 	@Override
 	public List<Kunde> getVormerker(Medium medium) {
 		// TODO Auto-generated method stub
-		return null;
+	    
+		return getVormerkkarteFuerMedium.getVormerker();
 	}
 
 	@Override
@@ -320,7 +322,19 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 	@Override
 	public List<Vormerkkarte> getVormerkkarteFuerKunde(Kunde kunde) {
 		// TODO Auto-generated method stub
-		return null;
+	    
+	    assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        List<Vormerkkarte> result = new ArrayList<Vormerkkarte>();
+        for (Vormerkkarte vormerkkarte : _vormerkkarten.values())
+        {
+            if (vormerkkarte.getEntleiher().equals(kunde))
+            {
+                result.add(vormerkkarte);
+            }
+        }
+        return result;
+	    
+		return 
 	}
 
 }
