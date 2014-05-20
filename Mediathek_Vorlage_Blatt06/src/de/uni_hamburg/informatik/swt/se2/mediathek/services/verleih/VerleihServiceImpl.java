@@ -31,10 +31,13 @@ public class VerleihServiceImpl extends AbstractObservableService implements
      * die Angabe des Mediums möglich. Beispiel: _verleihkarten.get(medium)
      */
     private Map<Medium, Verleihkarte> _verleihkarten;
+    private Map<Medium, Vormerkkarte> _vormerkkarten;
 
     /**
      * Der Medienbestand.
      */
+    
+    
     private MedienbestandService _medienbestand;
 
     /**
@@ -69,6 +72,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         _kundenstamm = kundenstamm;
         _medienbestand = medienbestand;
         _protokollierer = new VerleihProtokollierer();
+        _vormerkkarten = new HashMap<Medium, Vormerkkarte>();
     }
 
     /**
@@ -84,6 +88,8 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         }
         return result;
     }
+    
+    
 
     @Override
     public List<Verleihkarte> getVerleihkarten()
@@ -329,8 +335,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 
 	@Override
 	public Vormerkkarte getVormerkkarteFuerMedium(Medium medium) {
-		// TODO Auto-generated method stub
-		return null;
+		return _vormerkkarten.get(medium);
 	}
 
 	@Override
