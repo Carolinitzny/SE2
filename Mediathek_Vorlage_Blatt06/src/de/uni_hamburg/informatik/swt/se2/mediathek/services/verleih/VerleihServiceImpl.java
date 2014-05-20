@@ -326,14 +326,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 
 	@Override
 	public List<Kunde> getVormerker(Medium medium) {
-<<<<<<< HEAD
-		// TODO Auto-generated method stub	   
-		return null;
-=======
-		// TODO Auto-generated method stub
-	    
-		return getVormerkkarteFuerMedium(medium).getVormerker();
->>>>>>> a02fb870a0391a986153dfb8f4e2c38acbfe503d
+
 	}
 
 	@Override
