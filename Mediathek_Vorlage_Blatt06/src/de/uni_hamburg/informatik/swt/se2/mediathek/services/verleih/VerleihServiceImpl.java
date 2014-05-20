@@ -325,7 +325,9 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 	}
 
 	@Override
-	public List<Kunde> getVormerker(Medium medium) {
+	public List<Kunde> getVormerker(Medium medium) 
+	{  
+		return getVormerkkarteFuerMedium(medium).getVormerker();
 
 	}
 
