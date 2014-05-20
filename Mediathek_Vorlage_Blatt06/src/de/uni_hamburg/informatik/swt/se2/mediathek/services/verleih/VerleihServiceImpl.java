@@ -2,7 +2,6 @@ package de.uni_hamburg.informatik.swt.se2.mediathek.services.verleih;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +13,7 @@ import de.uni_hamburg.informatik.swt.se2.mediathek.materialien.medien.Medium;
 import de.uni_hamburg.informatik.swt.se2.mediathek.services.AbstractObservableService;
 import de.uni_hamburg.informatik.swt.se2.mediathek.services.kundenstamm.KundenstammService;
 import de.uni_hamburg.informatik.swt.se2.mediathek.services.medienbestand.MedienbestandService;
+import de.uni_hamburg.informatik.swt.se2.mediathek.services.medienbestand.MedienbestandServiceImpl;
 
 /**
  * Diese Klasse implementiert das Interface VerleihService. Siehe dortiger
@@ -31,13 +31,10 @@ public class VerleihServiceImpl extends AbstractObservableService implements
      * die Angabe des Mediums möglich. Beispiel: _verleihkarten.get(medium)
      */
     private Map<Medium, Verleihkarte> _verleihkarten;
-    private Map<Medium, Vormerkkarte> _vormerkkarten;
 
     /**
      * Der Medienbestand.
      */
-    
-    
     private MedienbestandService _medienbestand;
 
     /**
@@ -72,7 +69,6 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         _kundenstamm = kundenstamm;
         _medienbestand = medienbestand;
         _protokollierer = new VerleihProtokollierer();
-        _vormerkkarten = new HashMap<Medium, Vormerkkarte>();
     }
 
     /**
@@ -88,8 +84,6 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         }
         return result;
     }
-    
-    
 
     @Override
     public List<Verleihkarte> getVerleihkarten()
@@ -289,7 +283,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 	@Override
 	public boolean istVormerkenMoeglich(Kunde kunde, Medium medium) {
 		Vormerkkarte vormerkkarte = getVormerkkarteFuerMedium(medium);
-		if (vormerkkarte.equals(null) || vormerkkarte.getVormerker().size() >= 3)
+		if (vormerkkarte.equals(null) || vormerkkarte.getVormerker().size() > 3)
 				{
 					return false;
 				}
@@ -307,41 +301,40 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 	public void merkeVor(Kunde kunde, Medium medium) {
 		if (istVormerkenMoeglich(kunde, medium))
 		{
-		    Kunde entleiher;
-		    List<Kunde> vormerker;
-		    if(getVormerkkarteFuerMedium(medium).equals(null))
-		    {
-		        entleiher = getVerleihkarteFuer(medium).getEntleiher();
-		        vormerker = new LinkedList();
-		        vormerker.add(kunde);
-		    }
-		    else
-		    {
-			vormerker = getVormerkkarteFuerMedium(medium).getVormerker();
-			vormerker.add(kunde);
-			entleiher = getVormerkkarteFuerMedium(medium).getEntleiher();
-		    }
-			Vormerkkarte vormerkkarte = new Vormerkkarte(entleiher,medium,vormerker);
-			_vormerkkarten.remove(medium);
-			_vormerkkarten.add(medium, vormerkkarte);
+			List<Kunde> vormerker = getVormerkkarteFuerMedium(medium).getVormerker();
+			Vormerkkarte vormerkkarte = new Vormerkkarte(kunde, medium,  )
 		}
 	}
 
 	@Override
 	public List<Kunde> getVormerker(Medium medium) {
 		// TODO Auto-generated method stub
-		return null;
+	    
+		return getVormerkkarteFuerMedium.getVormerker();
 	}
 
 	@Override
 	public Vormerkkarte getVormerkkarteFuerMedium(Medium medium) {
-		return _vormerkkarten.get(medium);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public List<Vormerkkarte> getVormerkkarteFuerKunde(Kunde kunde) {
 		// TODO Auto-generated method stub
-		return null;
+	    
+	    assert kundeImBestand(kunde) : "Vorbedingung verletzt: kundeImBestand(kunde)";
+        List<Vormerkkarte> result = new ArrayList<Vormerkkarte>();
+        for (Vormerkkarte vormerkkarte : _vormerkkarten.values())
+        {
+            if (vormerkkarte.getEntleiher().equals(kunde))
+            {
+                result.add(vormerkkarte);
+            }
+        }
+        return result;
+	    
+		
 	}
 
 }
