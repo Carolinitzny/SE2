@@ -2,6 +2,7 @@ package de.uni_hamburg.informatik.swt.se2.mediathek.services.verleih;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
      * die Angabe des Mediums möglich. Beispiel: _verleihkarten.get(medium)
      */
     private Map<Medium, Verleihkarte> _verleihkarten;
+    private Map<Medium, Vormerkkarte> _vormerkkarten;
 
     /**
      * Der Medienbestand.
@@ -66,6 +68,7 @@ public class VerleihServiceImpl extends AbstractObservableService implements
         assert medienbestand != null : "Vorbedingung verletzt: medienbestand  != null";
         assert initialBestand != null : "Vorbedingung verletzt: initialBestand  != null";
         _verleihkarten = erzeugeVerleihkartenBestand(initialBestand);
+        _vormerkkarten = new HashMap<Medium, Vormerkkarte>();
         _kundenstamm = kundenstamm;
         _medienbestand = medienbestand;
         _protokollierer = new VerleihProtokollierer();
@@ -301,13 +304,12 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 	public void merkeVor(Kunde kunde, Medium medium) {
 		if (istVormerkenMoeglich(kunde, medium))
 		{
-<<<<<<< HEAD
 		    Kunde entleiher;
 		    List<Kunde> vormerker;
 		    if(getVormerkkarteFuerMedium(medium).equals(null))
 		    {
 		        entleiher = getVerleihkarteFuer(medium).getEntleiher();
-		        vormerker = new LinkedList();
+		        vormerker = new LinkedList<Kunde>();
 		        vormerker.add(kunde);
 		    }
 		    else
@@ -319,10 +321,6 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 			Vormerkkarte vormerkkarte = new Vormerkkarte(entleiher,medium,vormerker);
 			_vormerkkarten.remove(medium);
 			_vormerkkarten.put(medium, vormerkkarte);
-=======
-			List<Kunde> vormerker = getVormerkkarteFuerMedium(medium).getVormerker();
-			Vormerkkarte vormerkkarte = new Vormerkkarte(kunde, medium,  )
->>>>>>> 09249acbbc067036aa8a7809cc830536df603e22
 		}
 	}
 
@@ -330,13 +328,12 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 	public List<Kunde> getVormerker(Medium medium) {
 		// TODO Auto-generated method stub
 	    
-		return getVormerkkarteFuerMedium.getVormerker();
+		return getVormerkkarteFuerMedium(medium).getVormerker();
 	}
 
 	@Override
 	public Vormerkkarte getVormerkkarteFuerMedium(Medium medium) {
-		// TODO Auto-generated method stub
-		return null;
+        return _vormerkkarten.get(medium);
 	}
 
 	@Override
