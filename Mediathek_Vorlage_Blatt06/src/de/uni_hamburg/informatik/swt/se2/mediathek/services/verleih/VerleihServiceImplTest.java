@@ -145,12 +145,5 @@ public class VerleihServiceImplTest
                 Collections.singletonList(_medienListe.get(2)), _datum);
         assertFalse(ereignisse[0]);
     }
-    
-    public void testVormerkenundLoeschen()
-    {
-        assertTrue(_service.istVormerkenMoeglich(_vormerkkunde, _medienListe.get(0)));
-       _service.merkeVor(_vormerkkunde, _medienListe.get(0));
-       assertTrue(_service.getVormerkkarteFuerMedium(_medienListe.get(0)).getVormerker().contains(_vormerkkunde));
-    }
 
 }
