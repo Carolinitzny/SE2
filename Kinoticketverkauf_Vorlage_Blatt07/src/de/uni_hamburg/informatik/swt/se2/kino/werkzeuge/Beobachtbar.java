@@ -13,7 +13,7 @@ public abstract class Beobachtbar
         
     }
     
-    public void setzeBeobachtbae(Beobachter beobachter)
+    public void setzeBeobachter(Beobachter beobachter)
     {
         _beobachter.add(beobachter);
     }
