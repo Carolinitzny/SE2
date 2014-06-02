@@ -1,4 +1,5 @@
 package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge;
+import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.Beobachter;
 
 import java.util.Set;
 import java.util.HashSet;

@@ -11,6 +11,7 @@ import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.Beobachter;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.datumsauswaehler.DatumAuswaehlWerkzeug;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.platzverkauf.PlatzVerkaufsWerkzeug;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.vorstellungsauswaehler.VorstellungsAuswaehlWerkzeug;
+import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.Beobachter;
 
 /**
  * Das Kassenwerkzeug. Mit diesem Werkzeug kann die Benutzerin oder der Benutzer
@@ -32,6 +33,7 @@ public class KassenWerkzeug implements Beobachter
     private PlatzVerkaufsWerkzeug _platzVerkaufsWerkzeug;
     private DatumAuswaehlWerkzeug _datumAuswaehlWerkzeug;
     private VorstellungsAuswaehlWerkzeug _vorstellungAuswaehlWerkzeug;
+    private Beobachter beobachter;
 
     /**
      * Initialisiert das Kassenwerkzeug.
@@ -61,6 +63,12 @@ public class KassenWerkzeug implements Beobachter
         registriereUIAktionen();
         setzeTagesplanFuerAusgewaehltesDatum();
         setzeAusgewaehlteVorstellung();
+        
+        beobachter = this;
+        
+        _datumAuswaehlWerkzeug.setzeBeobachter(beobachter);
+        _vorstellungAuswaehlWerkzeug.setzeBeobachter(beobachter);
+
 
         _ui.zeigeFenster();
     }
