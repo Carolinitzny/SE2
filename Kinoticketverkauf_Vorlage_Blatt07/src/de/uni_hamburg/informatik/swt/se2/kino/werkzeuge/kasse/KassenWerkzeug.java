@@ -49,8 +49,10 @@ public class KassenWerkzeug implements Beobachter
         // Subwerkzeuge erstellen
         _platzVerkaufsWerkzeug = new PlatzVerkaufsWerkzeug("platzverkauf");
         _datumAuswaehlWerkzeug = new DatumAuswaehlWerkzeug("datumauswahl");
+        _datumAuswaehlWerkzeug.setzeBeobachter(this);
         _vorstellungAuswaehlWerkzeug = new VorstellungsAuswaehlWerkzeug("vorstellungsauswahl");
-
+        _vorstellungAuswaehlWerkzeug.setzeBeobachter(this);
+        
         // UI erstellen (mit eingebetteten UIs der direkten Subwerkzeuge)
         _ui = new KassenWerkzeugUI(_platzVerkaufsWerkzeug.getUIPanel(),
                 _datumAuswaehlWerkzeug.getUIPanel(),
