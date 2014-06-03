@@ -2,6 +2,8 @@ package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.kasse;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Datum;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Kino;
@@ -21,7 +23,7 @@ import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.Beobachter;
  * @author SE2-Team
  * @version SoSe 2014
  */
-public class KassenWerkzeug implements Beobachter
+public class KassenWerkzeug implements Observer
 {
     // Das Material dieses Werkzeugs
     private Kino _kino;
@@ -51,9 +53,9 @@ public class KassenWerkzeug implements Beobachter
         // Subwerkzeuge erstellen
         _platzVerkaufsWerkzeug = new PlatzVerkaufsWerkzeug("platzverkauf");
         _datumAuswaehlWerkzeug = new DatumAuswaehlWerkzeug("datumauswahl");
-        _datumAuswaehlWerkzeug.setzeBeobachter(this);
+        _datumAuswaehlWerkzeug.addObserver(this);
         _vorstellungAuswaehlWerkzeug = new VorstellungsAuswaehlWerkzeug("vorstellungsauswahl");
-        _vorstellungAuswaehlWerkzeug.setzeBeobachter(this);
+        _vorstellungAuswaehlWerkzeug.addObserver(this);
         
         // UI erstellen (mit eingebetteten UIs der direkten Subwerkzeuge)
         _ui = new KassenWerkzeugUI(_platzVerkaufsWerkzeug.getUIPanel(),
@@ -63,13 +65,8 @@ public class KassenWerkzeug implements Beobachter
         registriereUIAktionen();
         setzeTagesplanFuerAusgewaehltesDatum();
         setzeAusgewaehlteVorstellung();
-        
-        beobachter = this;
-        
-        _datumAuswaehlWerkzeug.setzeBeobachter(beobachter);
-        _vorstellungAuswaehlWerkzeug.setzeBeobachter(beobachter);
-
-
+                
+       
         _ui.zeigeFenster();
     }
 
@@ -130,7 +127,9 @@ public class KassenWerkzeug implements Beobachter
     {
         return _vorstellungAuswaehlWerkzeug.getAusgewaehlteVorstellung();
     }
-    
+    /**
+     * Ruft die benötigten Methoden auf, um Veränderungen zu realisieren.
+     */
     public void reagiereAufAenderung(String id)
     {
         switch (id)
@@ -144,4 +143,19 @@ public class KassenWerkzeug implements Beobachter
                 break;
         }
     }
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+
+        switch (arg0.toString())
+        {
+            case "datumauswahl":
+          //TODO looki looki machen
+            	setzeTagesplanFuerAusgewaehltesDatum();            	
+                break;
+            case "vorstellungsauswahl":
+            	setzeAusgewaehlteVorstellung();
+                break;
+	}
 }
+	}
