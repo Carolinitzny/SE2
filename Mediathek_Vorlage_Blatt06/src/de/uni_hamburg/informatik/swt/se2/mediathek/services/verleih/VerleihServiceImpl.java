@@ -328,8 +328,15 @@ public class VerleihServiceImpl extends AbstractObservableService implements
 
 	public List<Kunde> getVormerker(Medium medium) 
 	{  
-		return getVormerkkarteFuerMedium(medium).getVormerker();
-
+	    if(getVormerkkarteFuerMedium(medium)!=null)
+	    {
+	    	return getVormerkkarteFuerMedium(medium).getVormerker();
+	    }
+	    else
+	    {
+	        
+	        return new LinkedList<Kunde>();
+	    }
 	}
 
 	@Override

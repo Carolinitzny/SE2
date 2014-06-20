@@ -46,7 +46,9 @@ public class Vormerkkarte
 
         _entleiher = entleiher;
         _medium = medium;
+        // TODO: Vormerker müssen auch irgendwo gespeichert werden, gell
         _vormerker = new LinkedList<Kunde>();
+        
     }
 
     /**
