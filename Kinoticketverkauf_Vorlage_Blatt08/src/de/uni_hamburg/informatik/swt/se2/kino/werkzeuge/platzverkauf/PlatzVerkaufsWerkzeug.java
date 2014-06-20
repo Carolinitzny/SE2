@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
+import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Geld;
 import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Platz;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Kinosaal;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Vorstellung;
@@ -90,6 +91,7 @@ public class PlatzVerkaufsWerkzeug
      */
     private void fuehreBarzahlungDurch()
     {
+    	PayDatShitWerkzeug bezahlwerkzeug = new PayDatShitWerkzeug(new Geld(12,10));
         verkaufePlaetze(_vorstellung);
     }
 
@@ -105,7 +107,6 @@ public class PlatzVerkaufsWerkzeug
         _ui.getStornierenButton().setEnabled(istStornierenMoeglich(plaetze));
         aktualisierePreisanzeige(plaetze);
     }
-
     /**
      * Aktualisiert den anzuzeigenden Gesamtpreis
      */
