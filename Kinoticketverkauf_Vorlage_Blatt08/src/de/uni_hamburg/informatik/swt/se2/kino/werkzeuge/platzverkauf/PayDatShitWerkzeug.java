@@ -23,4 +23,9 @@ public class PayDatShitWerkzeug
 	{
 		return preis.subtrahiere(bargeld);
 	}
+	
+	public boolean istBezahlt()
+	{
+		return berechneRestbetrag(_preis, _bargeld).gibBetrag() < 0;
+	}
 }
