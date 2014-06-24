@@ -14,7 +14,7 @@ import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Geld;
  * 
  * 
  * 
- * @author 
+ * @author deegah
  *
  */
 
