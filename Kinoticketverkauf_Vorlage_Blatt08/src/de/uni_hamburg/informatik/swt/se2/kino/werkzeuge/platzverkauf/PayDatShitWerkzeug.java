@@ -51,15 +51,19 @@ public class PayDatShitWerkzeug
         		{
         			if (_ui.getBargeldFeld().getText().matches("[0-9]*"))
         			{
-        		_bargeld = Integer.parseInt(_ui.getBargeldFeld().getText());
-        		berechneRestbetrag(_preis, _bargeld);
-        		if (istBezahlt(_bargeld))
-        				{
-        					_bezahlphase = 2;
-        					_ui.getOkButton().setText("Tickets buchen");
-        				}else{
-        					_ui.getOkButton().setText("Ok");
-        				}
+        				try {
+							_bargeld = Integer.parseInt(_ui.getBargeldFeld().getText());
+							berechneRestbetrag(_preis, _bargeld);
+							if (istBezahlt(_bargeld))
+							{
+								_bezahlphase = 2;
+								_ui.getOkButton().setText("Tickets buchen");
+							}else{
+								_ui.getOkButton().setText("Ok");
+							}
+						} catch (NumberFormatException e) {
+							_ui.getOkButton().setText("Kino kaufen nicht möglich");
+						}
         			}else{
         				_ui.getOkButton().setText("Ungültiger Bargeldwert");
         			}
