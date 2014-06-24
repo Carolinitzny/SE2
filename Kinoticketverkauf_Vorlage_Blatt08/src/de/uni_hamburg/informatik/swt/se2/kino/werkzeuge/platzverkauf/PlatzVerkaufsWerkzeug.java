@@ -28,6 +28,7 @@ public class PlatzVerkaufsWerkzeug
     private Vorstellung _vorstellung;
 
     private PlatzVerkaufsWerkzeugUI _ui;
+    private int _platzpreis;
 
     /**
      * Initialisiert das PlatzVerkaufsWerkzeug.
@@ -91,8 +92,12 @@ public class PlatzVerkaufsWerkzeug
      */
     private void fuehreBarzahlungDurch()
     {
-    	PayDatShitWerkzeug bezahlwerkzeug = new PayDatShitWerkzeug(new Geld(12,10));
-        verkaufePlaetze(_vorstellung);
+    	PayDatShitWerkzeug bezahlwerkzeug = new PayDatShitWerkzeug(_platzpreis);
+    	if (bezahlwerkzeug._istBezahlt)
+    	{
+    		verkaufePlaetze(_vorstellung);
+    	}
+
     }
 
     /**
@@ -117,24 +122,29 @@ public class PlatzVerkaufsWerkzeug
             int preis = _vorstellung.getPreisFuerPlaetze(plaetze);
             _ui.getPreisLabel().setText(
                     "Gesamtpreis: " + preis + " Eurocent");
+            _platzpreis = preis;
         }
         else if (istStornierenMoeglich(plaetze))
         {
             int preis = _vorstellung.getPreisFuerPlaetze(plaetze);
             _ui.getPreisLabel().setText(
                     "Gesamtstorno: " + preis + " Eurocent");
+            _platzpreis = preis;
         }
         else if (!plaetze.isEmpty())
         {
             _ui.getPreisLabel().setText(
                     "Verkauf und Storno nicht gleichzeitig möglich!");
+            _platzpreis = 0;
         }
         else
         {
             _ui.getPreisLabel().setText(
                     "Gesamtpreis: 0 Eurocent");
+            _platzpreis = 0;
         }
     }
+    
 
     /**
      * Prüft, ob die angegebenen Plätze alle storniert werden können.

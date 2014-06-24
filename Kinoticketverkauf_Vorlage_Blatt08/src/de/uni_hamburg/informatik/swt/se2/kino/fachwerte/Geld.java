@@ -10,6 +10,15 @@ public class Geld
 		_euro = euro;
 		_cent = cent;
 	}
+	public Geld(int eurocent)
+	{
+		String betrag = Integer.toString(eurocent);
+		if (betrag.length()>3)
+		{
+		_euro = Integer.parseInt(betrag.substring(0, betrag.length()-3));
+		_cent = Integer.parseInt(betrag.substring(betrag.length()-3, betrag.length()-1));
+		}
+	}
 	
 	public int gibEuro()
 	{
