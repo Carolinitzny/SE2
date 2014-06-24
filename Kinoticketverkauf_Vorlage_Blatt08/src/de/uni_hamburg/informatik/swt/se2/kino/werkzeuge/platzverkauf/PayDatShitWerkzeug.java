@@ -32,7 +32,7 @@ public class PayDatShitWerkzeug
 	public int berechneRestbetrag(int preis, int bargeld)
 	{
 		int restbetrag = preis-bargeld;
-		_ui.getRestbetragLabel().setText(String.valueOf(restbetrag));
+		_ui.getRestbetragLabel().setText(String.valueOf(restbetrag*-1)+" Eurocent");
 		return preis-bargeld;
 	}
 	

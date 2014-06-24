@@ -29,7 +29,7 @@ public class PayDatShitWerkzeugUI extends JDialog {
         _dialog.setModal(true);
         _dialog.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
         _dialog.getContentPane().add(new JLabel("Zu zahlen:"));
-        _preisLabel = new JLabel(String.valueOf(preis));
+        _preisLabel = new JLabel(String.valueOf(preis)+" Eurocent");
         _dialog.getContentPane().add(_preisLabel);
         JLabel bargeldLabel = new JLabel("Bargeld:");
         _dialog.getContentPane().add(bargeldLabel);
