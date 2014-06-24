@@ -11,18 +11,29 @@ import java.awt.event.ActionEvent;
 
 public class PayDatShitWerkzeugUI extends JDialog {
 
-	/**
-	 * 
-	 */
-	public JDialog _dialog;
+	
+	private JDialog _dialog;
 	private JLabel _preisLabel;
 	private JLabel _restbetragLabel;
 	private JTextField _bargeldField;
 	private JButton _okButton;
 	private JButton _abbrechenButton;
 	
+	/**
+	 * Erstellt ein JDialog, welches im 
+	 * engen Austausch mit dem PayDatShitWerkzeug steht.
+	 * Es wird ein Interface mit einem OkButton, einem AbbrechenButton und Feldern
+	 * fuer die Betraege erstellt.
+	 * @param preis in Eurocent
+	 
+	 
+	 */
+	
 	public PayDatShitWerkzeugUI(int preis) 
 	{
+	    
+	    
+	    //Erzeugen der UI.
         _dialog = new JDialog();
         _dialog.setTitle("PayDatShit");
         _dialog.setSize(269,323);
@@ -46,23 +57,28 @@ public class PayDatShitWerkzeugUI extends JDialog {
         _abbrechenButton = new JButton("Abbrechen");
         _dialog.getContentPane().add(_abbrechenButton);
 	}
-
+  
+	// Get Methoden fuer Zugriff auf Dialog
 	public JDialog getDialog()
 	{
 		return _dialog;
 	}
+	// Get Methoden fuer Zugriff auf den Okbutton
 	public JButton getOkButton()
 	{
 		return _okButton;
 	}
+	// Get Methoden fuer Zugriff auf den Abbruchbutton
 	public JButton getAbbrechenButton()
 	{
 		return _abbrechenButton;
 	}
+	// Get Methoden fuer Zugriff auf das Feld, mit dem Geldbetrag
 	public JTextField getBargeldFeld()
 	{
 		return _bargeldField;
 	}
+	// Get Methoden fuer Zugriff auf die Anzeige des Restbetrags
 	public JLabel getRestbetragLabel()
 	{
 		return _restbetragLabel;

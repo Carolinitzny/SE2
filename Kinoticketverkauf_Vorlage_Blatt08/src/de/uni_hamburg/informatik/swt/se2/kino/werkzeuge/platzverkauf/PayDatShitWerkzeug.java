@@ -34,6 +34,7 @@ public class PayDatShitWerkzeug
      * 
      */
 	
+
 	public PayDatShitWerkzeug(int preis)
 	{
 		_preis = preis;
@@ -68,7 +69,7 @@ public class PayDatShitWerkzeug
 	    assert(bargeld>=0):"Bargeld darf kein negativer Wert sein";
 		int restbetrag = preis-bargeld;
 		_ui.getRestbetragLabel().setText(String.valueOf(restbetrag*-1)+" Eurocent");
-		return preis-bargeld;
+		return restbetrag;
 	}
 	
 	/**
@@ -82,8 +83,8 @@ public class PayDatShitWerkzeug
 	public boolean istBezahlt(int bargeld)
 	{
 	    assert(bargeld>=0):"Bargeld darf kein negativer Wert sein";
-		_istBezahlt = berechneRestbetrag(_preis, bargeld) < 0;
-		return berechneRestbetrag(_preis, bargeld) < 0;
+		_istBezahlt = berechneRestbetrag(_preis, bargeld) <= 0;
+		return _istBezahlt;
 	}
 	
 	/**
@@ -93,22 +94,27 @@ public class PayDatShitWerkzeug
 	public void registriereUIaktionen()
 	{
 		
-		_ui.getOkButton().addActionListener(new ActionListener() {
+		_ui.getOkButton().addActionListener(new ActionListener() 
+		{
         	public void actionPerformed(ActionEvent okbutton) 
         	{
         		if (_bezahlphase == 1)
         		{
         			if (_ui.getBargeldFeld().getText().matches("[0-9]*"))
         			{
-        		_bargeld = Integer.parseInt(_ui.getBargeldFeld().getText());
-        		berechneRestbetrag(_preis, _bargeld);
-        		if (istBezahlt(_bargeld))
-        				{
-        					_bezahlphase = 2;
-        					_ui.getOkButton().setText("Tickets buchen");
-        				}else{
-        					_ui.getOkButton().setText("Ok");
-        				}
+        				try {
+							_bargeld = Integer.parseInt(_ui.getBargeldFeld().getText());
+							berechneRestbetrag(_preis, _bargeld);
+							if (istBezahlt(_bargeld))
+							{
+								_bezahlphase = 2;
+								_ui.getOkButton().setText("Tickets buchen");
+							}else{
+								_ui.getOkButton().setText("Ok");
+							}
+						} catch (NumberFormatException e) {
+							_ui.getOkButton().setText("Kino kaufen nicht möglich");
+						}
         			}else{
         				_ui.getOkButton().setText("Ungültiger Bargeldwert");
         			}
