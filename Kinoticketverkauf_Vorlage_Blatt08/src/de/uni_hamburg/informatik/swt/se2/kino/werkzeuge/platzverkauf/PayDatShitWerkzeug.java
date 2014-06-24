@@ -16,6 +16,7 @@ public class PayDatShitWerkzeug
 	private int _preis;
 	private PayDatShitWerkzeugUI _ui;
 	private int _bargeld;
+	
 	public PayDatShitWerkzeug(int preis)
 	{
 		_preis = preis;
@@ -33,18 +34,19 @@ public class PayDatShitWerkzeug
 	{
 		int restbetrag = preis-bargeld;
 		_ui.getRestbetragLabel().setText(String.valueOf(restbetrag*-1)+" Eurocent");
-		return preis-bargeld;
+		return restbetrag;
 	}
 	
 	public boolean istBezahlt(int bargeld)
 	{
 		_istBezahlt = berechneRestbetrag(_preis, bargeld) < 0;
-		return berechneRestbetrag(_preis, bargeld) < 0;
+		return _istBezahlt;
 	}
 	public void registriereUIaktionen()
 	{
 		
-		_ui.getOkButton().addActionListener(new ActionListener() {
+		_ui.getOkButton().addActionListener(new ActionListener() 
+		{
         	public void actionPerformed(ActionEvent okbutton) 
         	{
         		if (_bezahlphase == 1)
