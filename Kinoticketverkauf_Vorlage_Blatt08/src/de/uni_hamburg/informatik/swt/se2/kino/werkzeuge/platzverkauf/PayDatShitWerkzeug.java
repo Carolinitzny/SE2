@@ -39,7 +39,7 @@ public class PayDatShitWerkzeug
 	
 	public boolean istBezahlt(int bargeld)
 	{
-		_istBezahlt = berechneRestbetrag(_preis, bargeld) < 0;
+		_istBezahlt = berechneRestbetrag(_preis, bargeld) <= 0;
 		return _istBezahlt;
 	}
 	public void registriereUIaktionen()
