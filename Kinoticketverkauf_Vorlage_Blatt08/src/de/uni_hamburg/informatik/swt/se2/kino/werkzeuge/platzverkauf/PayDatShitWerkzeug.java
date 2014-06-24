@@ -108,6 +108,7 @@ public class PayDatShitWerkzeug
 							if (istBezahlt(_bargeld))
 							{
 								_bezahlphase = 2;
+								_ui.getBargeldFeld().setEditable(false);
 								_ui.getOkButton().setText("Tickets buchen");
 							}else{
 								_ui.getOkButton().setText("Ok");
@@ -131,6 +132,7 @@ public class PayDatShitWerkzeug
             @Override
             public void actionPerformed(ActionEvent e)
             {
+            	_istBezahlt = false;
             	_ui.getDialog().setVisible(false);
             }
         });
