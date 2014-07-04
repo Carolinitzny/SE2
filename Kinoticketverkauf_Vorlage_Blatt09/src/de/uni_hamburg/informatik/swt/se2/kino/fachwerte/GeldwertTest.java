@@ -13,7 +13,7 @@ import org.junit.Test;
  */
 public class GeldwertTest
 {
-    Geldwert geldwert = new Geldwert(2050);
+    Geldwert geldwert = new Geldwert("20,50");
     Geldwert geldwert2 = new Geldwert(100);
     
     @Test

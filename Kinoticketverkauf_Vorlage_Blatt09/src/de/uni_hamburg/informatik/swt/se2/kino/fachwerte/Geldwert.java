@@ -36,13 +36,13 @@ public class Geldwert
     public Geldwert(String wert)
     {
         _negativ = false;
-        
-        if (wert.matches("[0-9]+")) //hab hier mal angenommen dass eurocent als string eingegeben werden und das gefixed
+        if (wert.matches("[0-9]+"))
         {
-            _euro = Integer.parseInt(wert)/100;
-            _cent = Integer.parseInt(wert)%100;
-            _eurocent = Integer.parseInt(wert);
+        	_euro = Integer.parseInt(wert);
+        	_cent = 0;
+        	_eurocent = _euro*100;
         }
+        
         else if (wert.matches("[0-9]+(,)[0-9]{2}")) //hab die richtige Regex eingefügt.
         {
             String[] parts = wert.split(","); 

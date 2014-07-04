@@ -135,7 +135,6 @@ public class KassenWerkzeug implements Observer
         switch (id)
         {
             case "datumauswahl":
-          //TODO looki looki machen
             	setzeTagesplanFuerAusgewaehltesDatum();            	
                 break;
             case "vorstellungsauswahl":
@@ -150,7 +149,6 @@ public class KassenWerkzeug implements Observer
         switch (arg0.toString())
         {
             case "datumauswahl":
-          //TODO looki looki machen
             	setzeTagesplanFuerAusgewaehltesDatum();            	
                 break;
             case "vorstellungsauswahl":

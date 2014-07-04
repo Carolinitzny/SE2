@@ -10,33 +10,12 @@ import java.awt.event.WindowEvent;
 import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Geldwert;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.ObservableSubwerkzeug;
 
-/**
- * TODO für Blatt 8: Löschen
- * 
- * Das Barzahlungswerkzeug behandelt die Kasseneingabe. Es ermöglicht die
- * Eingabe eines gezahlten Betrags und ermittelt automatisch den Restbetrag zur
- * Unterstützung des Verkaufs.
- * 
- * Wurde die Bezahlung erfolgreich abgeschlossen, kann dieser Status abgefragt
- * werden. Bei einer erneuten Durchführung einer Bezahlung wird dieser
- * Werkzeugstatus zu Beginn wieder auf nicht erfolgreich (false) gesetzt.
- * 
- * Das Beenden des Bezahlvorgangs (OK oder Abbrechen) führt zu einer
- * Benachrichtigung aller Beobachter, die danach den Status abfragen können.
- * 
- * Das Werkzeug arbeitet mit einem modalen Dialog, d. h. der Programmfluss
- * bleibt in diesem Werkzeug und wird erst nach dem Beenden an den Aufrufer
- * zurückgegeben.
- * 
- * @author SE2-Team
- * @version SoSe 2014
- */
+
 public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
 {
 
     private BarzahlungsWerkzeugUI _ui;
     private Geldwert _preis;
-    //TODO geldwert statt in
     private boolean _barzahlungErfolgreich;
     private boolean _ausreichenderGeldbetrag;
 
@@ -57,10 +36,9 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
      * 
      * @param preis der einzunehmende Gelbetrag
      */
-    //TODO Geldwert übergeben
-    public void fuehreBarzahlungDurch(int preis)
+    public void fuehreBarzahlungDurch(Geldwert preis)
     {
-        _preis = new Geldwert(preis);
+        _preis = preis;
         _ausreichenderGeldbetrag = false;
         _barzahlungErfolgreich = false;
         setzeUIAnfangsstatus();
@@ -172,11 +150,10 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
         try
         {
             Geldwert eingabeBetrag = new Geldwert(eingabePreis);
-            //TODO string nicht parsen, sondern geldbetrag erstellen und vergleich mit getEurocent
             _ausreichenderGeldbetrag = (eingabeBetrag.getEurocent() >= _preis.getEurocent());
-            //TODO geldwert statt int und subtrahieren des fachwerts nutzen
             Geldwert differenz = eingabeBetrag;
             zeigeRestbetrag(differenz.subtrahieren(_preis));
+            
         }
         catch (NumberFormatException ignore)
         {
@@ -251,10 +228,8 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
      * 
      * @param differenz ein eingegebener Betrag
      */
-    //TODO geldwert übergeben
     private void zeigeRestbetrag(Geldwert differenz)
     {
-        //TODO toString
         _ui.getRestbetragTextfield().setText(differenz.getString() + " €");
     }
 
@@ -263,7 +238,6 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
      */
     private void zeigePreis()
     {
-        //TODO toString statt int
         _ui.getPreisTextfield().setText(_preis.getString() + " €");
     }
 }
