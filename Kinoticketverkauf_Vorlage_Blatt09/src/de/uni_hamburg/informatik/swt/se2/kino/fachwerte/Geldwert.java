@@ -19,14 +19,16 @@ public class Geldwert
         {
             _negativ = true;
             _eurocent = wert * (-1);
-            _euro = (_eurocent - (_eurocent % 100)) / 100;
+            _euro = (_eurocent/100);
+//            _euro = (_eurocent - (_eurocent % 100)) / 100;
             _cent = _eurocent % 100;
         }
         else
         {
             _negativ = false;
             _eurocent = wert;
-            _euro = (wert - (wert % 100)) / 100;
+//            _euro = (wert - (wert % 100)) / 100;
+            _euro = (wert/100);
             _cent = wert % 100;
         }
     }
@@ -35,13 +37,13 @@ public class Geldwert
     {
         _negativ = false;
         
-        if (wert.matches("[0-9]+"))
+        if (wert.matches("[0-9]+")) //hab hier mal angenommen dass eurocent als string eingegeben werden und das gefixed
         {
-            _euro = Integer.parseInt(wert)*100;
-            _cent = 0;
-            _eurocent = _euro * 100;
+            _euro = Integer.parseInt(wert)/100;
+            _cent = Integer.parseInt(wert)%100;
+            _eurocent = Integer.parseInt(wert);
         }
-        else if (wert.matches("[0-9]+,(0-9)(0-9)"))
+        else if (wert.matches("[0-9]+(,)[0-9]{2}")) //hab die richtige Regex eingefügt.
         {
             String[] parts = wert.split(","); 
             _euro = Integer.parseInt(parts[0]);
@@ -56,16 +58,53 @@ public class Geldwert
         }
     }
     
-    public static Geldwert addieren(Geldwert geldwert, Geldwert geldwert2)
+    public Geldwert addieren(Geldwert geldwert)
     {
-        int ergebnis = geldwert.getEurocent() + geldwert2.getEurocent();
-        
-        return new Geldwert(ergebnis);
+        return new Geldwert(geldwert.getEurocent() + this.getEurocent());
     }
     
-    private int getEurocent()
+    public Geldwert subtrahieren(Geldwert geldwert)
+    {
+    	return new Geldwert(this.getEurocent() - geldwert.getEurocent());
+    }
+    
+    public Geldwert multiplizieren(Geldwert geldwert)
+    {
+    	return new Geldwert(this.getEurocent() * geldwert.getEurocent());
+    }
+    
+    public Geldwert multiplizieren(int geldwert)
+    {
+    	return new Geldwert(this.getEurocent() * geldwert);
+    }
+    
+    public int getEurocent()
     {
         return _eurocent;
     }
     
+    public int getEuro()
+    {
+    	return _euro;
+    }
+    
+    public int getCent()
+    {
+    	return _cent;
+    }
+    
+    public boolean istNegativ()
+    {
+    	return _negativ;
+    }
+    
+    public String getString()
+    {
+    	if (String.valueOf(_cent).length()<2)
+    	{
+    	return String.valueOf(_euro)+",0"+String.valueOf(_cent);
+    	}else{
+    		return String.valueOf(_euro)+","+String.valueOf(_cent);
+    	}
+    }
 }

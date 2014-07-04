@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Geldwert;
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.ObservableSubwerkzeug;
 
 /**
@@ -34,7 +35,7 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
 {
 
     private BarzahlungsWerkzeugUI _ui;
-    private int _preis;
+    private Geldwert _preis;
     //TODO geldwert statt in
     private boolean _barzahlungErfolgreich;
     private boolean _ausreichenderGeldbetrag;
@@ -59,7 +60,7 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
     //TODO Geldwert übergeben
     public void fuehreBarzahlungDurch(int preis)
     {
-        _preis = preis;
+        _preis = new Geldwert(preis);
         _ausreichenderGeldbetrag = false;
         _barzahlungErfolgreich = false;
         setzeUIAnfangsstatus();
@@ -170,12 +171,12 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
         }
         try
         {
-            int eingabeBetrag = Integer.parseInt(eingabePreis);
+            Geldwert eingabeBetrag = new Geldwert(eingabePreis);
             //TODO string nicht parsen, sondern geldbetrag erstellen und vergleich mit getEurocent
-            _ausreichenderGeldbetrag = (eingabeBetrag >= _preis);
+            _ausreichenderGeldbetrag = (eingabeBetrag.getEurocent() >= _preis.getEurocent());
             //TODO geldwert statt int und subtrahieren des fachwerts nutzen
-            int differenz = Math.abs(eingabeBetrag - _preis);
-            zeigeRestbetrag(differenz);
+            Geldwert differenz = eingabeBetrag;
+            zeigeRestbetrag(differenz.subtrahieren(_preis));
         }
         catch (NumberFormatException ignore)
         {
@@ -251,10 +252,10 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
      * @param differenz ein eingegebener Betrag
      */
     //TODO geldwert übergeben
-    private void zeigeRestbetrag(int differenz)
+    private void zeigeRestbetrag(Geldwert differenz)
     {
         //TODO toString
-        _ui.getRestbetragTextfield().setText(differenz + " Eurocent");
+        _ui.getRestbetragTextfield().setText(differenz.getString() + " €");
     }
 
     /**
@@ -263,6 +264,6 @@ public class BarzahlungsWerkzeug extends ObservableSubwerkzeug
     private void zeigePreis()
     {
         //TODO toString statt int
-        _ui.getPreisTextfield().setText(_preis + " Eurocent");
+        _ui.getPreisTextfield().setText(_preis.getString() + " €");
     }
 }
