@@ -21,19 +21,20 @@ public class GeldwertTest
     {
         Geldwert summe = geldwert.addieren(geldwert2);
         assertTrue(summe.getEurocent() == 2150);
-    }
+        Geldwert summe2 = summe.addieren(new Geldwert(-500));
+        assertTrue(summe2.getEurocent()== 1650);
+        }
     
     @Test
    public void testeSubtrahieren()
     {
         Geldwert differenz = geldwert2.subtrahieren(geldwert);
-        assertTrue(differenz.getEurocent() == 1950 && differenz.istNegativ()); 
-        /*
-        da der wert ja immer positiv gesetzt wird und nur das istNegativ flag gesetzt wird muss hier so geprüft werden
-        dazu waren die werte auch falsch rum. 2050-100 ist nicht -1950. hab das umgedreht sodass jetzt geldwert(2050) von
-        Geldwert2(100) abgezogen wird.
-        */
+        assertTrue(differenz.getEurocent() == 1950 && !differenz.istNegativ()); 
+        differenz = geldwert.subtrahieren(geldwert2);
+        assertTrue(differenz.getEurocent() == 1950 && differenz.istNegativ());
+        
     }
+    
     
     @Test
     public void testeMultiplizieren()

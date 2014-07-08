@@ -68,7 +68,7 @@ public class PayDatShitWerkzeug
 	{
 	    assert(bargeld>=0):"Bargeld darf kein negativer Wert sein";
 		int restbetrag = preis-bargeld;
-		_ui.getRestbetragLabel().setText(String.valueOf(restbetrag*-1)+" Eurocent");
+		_ui.getRestbetragLabel().setText(String.valueOf(restbetrag * -1)+" Eurocent");
 		return restbetrag;
 	}
 	
